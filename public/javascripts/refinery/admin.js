@@ -566,19 +566,35 @@ var list_reorder = {
   , enable_reordering: function(e) {
     if(e) { e.preventDefault(); }
 
-    list_reorder.sortable_list.find('li').each(function(index, li) {
-      if ($('ul', li).length) { return; }
-      $("<ul></ul>").appendTo(li);
-    });
+    draggables = list_reorder.sortable_list.find("li");
+    $("<ul class='empty'></ul>").appendTo(draggables.not(":has('ul')"));
+    lists = list_reorder.sortable_list.add(list_reorder.sortable_list.find('ul'));
 
-    list_reorder.sortable_list.add(list_reorder.sortable_list.find('ul')).sortable({
-      'connectWith': $(list_reorder.sortable_list.find('ul'))
-			, 'tolerance': 'pointer'
-			, 'placeholder': 'placeholder'
-			, 'cursor': 'drag'
-			, 'items': 'li'
-			, 'axis': 'y'
+    draggables.draggable({
+      helper: 'clone'
     });
+    droppables = lists.droppable({
+      over: function(e, ui) {
+      }
+      , hoverClass: 'ui-state-hover'
+      , activeClass: 'ui-state-active'
+      , drop: function(e, ui) {
+        $(this).addClass('')
+      }
+      , tolerance: 'touch'
+    });
+    /*
+    (lists = list_reorder.sortable_list.add(list_reorder.sortable_list.find('ul'))).each(function(index, list) {
+      $(list).sortable({
+  		  connectWith: lists
+        , cursor: 'drag'
+    		, dropOnEmpty: true
+    		, revert: 100
+    		, placeholder: 'placeholder'
+    		, tolerance: 'pointer'
+    	});
+    });
+    */
 
     $('#reorder_action').hide();
     $('#reorder_action_done').show();
