@@ -19,7 +19,7 @@ gem 'authlogic',      '~> 2.1.3', :require => 'authlogic'
 gem 'friendly_id',    '~> 2.3.3', :require => 'friendly_id'
 gem 'will_paginate',  '~> 2.3.12', :require => 'will_paginate'
 # explicitly call require when in production, seems to fix a couple problems.
-require 'will_paginate' if Rails.env.production?
+# require 'will_paginate' if Rails.env.production?
 #===REFINERY END OF REQUIRED GEMS===
 
 #===REQUIRED FOR REFINERY GEM INSTALL===
