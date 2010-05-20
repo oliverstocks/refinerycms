@@ -1,0 +1,24 @@
+ <% @blogs.each do |blog| %>
+	<div class="right">
+		<h2 id='body_content_page_title'><%= blog.title %></h2>
+		<p class="post-info">Filed under tutorials</p>
+
+        <%= blog.excerpt %>
+		<p>
+			<%= link_to 'continue reading &raquo;', blog_post_url(blog.permalink), :class => "more" -%>
+        </p>
+	</div>
+
+	<div class="left">
+		<p class="dateinfo">May<span>13</span></p>
+		<div class="post-meta">
+			<h4>Post Info</h4>
+			<ul>
+				<!-- <li class="user"><a href="#">Erwin</a></li> //--!>
+				<li class="time"><a href="#">03:23 PM</a></li>
+				<!-- <li class="comment"><a href="#">10 Comments</a></li> //-->
+				<!-- <li class="permalink"><a href="#">Permalink</a></li>  //-->
+			</ul>
+		</div>
+	</div>
+<% end %>

@@ -20,15 +20,14 @@
 	<p id="rss">
       <a href="index.html">Grab the RSS feed</a>
   	</p>
-
-   <form id="quick-search" method="get" action="index.html">
+ 
+	<% form_tag({:controller => 'search'}, :id => "quick-search") do -%>
       <fieldset class="search">
          <label for="qsearch">Search:</label>
-         <input class="tbox" id="qsearch" type="text" name="qsearch" value="Search..." title="Start typing and hit ENTER" />
+  		 <%= text_field_tag :query, {},  {:type => "search", :class => "tbox", :id => 'qsearch', :placeholder => (params[:query] || "Search site for...")} %>
          <button class="btn" title="Submit Search">Search</button>
       </fieldset>
-   </form>
-
+   <% end %>                    
 <!--/header-->
 </div></div>
 	
@@ -46,51 +45,15 @@
 
       <!-- sidebar -->
 		<div id="sidebar">
-		<%= get_snipplet('about-me') %>
+		
       	<div class="about-me">
-
-         	<h3>About Me</h3>
-		      <p>
-		      <a ref="index.html">
-			<%= image_tag "gravatar.jpg", :theme => true, :size => "40x40", :alt => "firefox", :class => "float-left" %>
-		      </a>
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec libero. Suspendisse bibendum.
-			   Cras id urna. Morbi tincidunt, orci ac convallis aliquam, lectus turpis varius lorem, eu
-			   posuere nunc justo tempus leo <a href="index.html">Learn more...</a>
-				</p>
-
-         </div>
+			<%= get_snipplet('about-me') %>
+		</div>
 
 			<div class="sidemenu">
 
 				<h3>Sidebar Menu</h3>
     <%= render :partial => "/shared/submenu" if !admin? and (!defined?(show_submenu) or show_submenu == true) and RefinerySetting.find_or_set(:show_submenu_on_content_pages, true) %>  
-
-			</div>
-
-			<div class="sidemenu">
-
-				<h3>Sponsors</h3>
-            <ul>
-					<li><a href="http://www.dreamtemplate.com" title="Website Templates">DreamTemplate <br />
-	            	<span>Over 6,000+ Premium Web Templates</span></a>
-	            </li>
-					<li><a href="http://www.themelayouts.com" title="WordPress Themes">ThemeLayouts <br />
-	            	<span>Premium WordPress &amp; Joomla Themes</span></a>
-	            </li>
-					<li><a href="http://www.imhosted.com" title="Website Hosting">ImHosted.com <br />
-	            	<span>Affordable Web Hosting Provider</span></a>
-	            </li>
-					<li><a href="http://www.dreamstock.com" title="Stock Photos">DreamStock <br />
-	            	<span>Download Amazing Stock Photos</span></a>
-	            </li>
-					<li><a href="http://www.evrsoft.com" title="Website Builder">Evrsoft <br />
-	            	<span>Website Builder Software &amp; Tools</span></a>
-	            </li>
-					<li><a href="http://www.webhostingwp.com" title="Web Hosting">Web Hosting <br />
-	            	<span>Top 10 Hosting Reviews</span></a>
-	            </li>
-				</ul>
 
 			</div>
 

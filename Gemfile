@@ -19,6 +19,8 @@ gem 'authlogic',      '~> 2.1.3', :require => 'authlogic'
 gem 'friendly_id',    '~> 2.3.3', :require => 'friendly_id'
 gem 'will_paginate',  '~> 2.3.12', :require => 'will_paginate'
 # explicitly call require when in production, seems to fix a couple problems.
+gem 'acts_as_taggable' # '~> 2.0.2', :require => 'acts_as_taggable'
+gem 'acts-as-taggable-on'
 # require 'will_paginate' if Rails.env.production?
 #===REFINERY END OF REQUIRED GEMS===
 
