@@ -1,0 +1,88 @@
+<%
+# Data time to time
+posted = @blog.created_at.to_time
+
+
+%>
+<% content_for :head_after_javascript_libraries do %>
+  <%= auto_discovery_link_tag(:rss, blog_url(:format => 'rss'), {:title => "#{RefinerySetting.find_or_set(:site_name, "Company Name")} Blog"}) %>
+<% end %>
+
+
+
+
+
+<div class="right">
+	<h2 id='body_content_page_title'><%= @blog.title %></h2>
+	<p class="post-info">Filed under tutorials</p>
+        
+	<i><%= @blog.excerpt %></i>
+	<%= @blog.body %>
+
+    <br />
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+<div class="left">
+	<p class="dateinfo"><%= posted.strftime("%b") %><span><%= posted.strftime("%d") %></span></p>
+	<div class="post-meta">
+		<h4>Post Info</h4>
+		<ul>
+			<% if @blog.author_list.present? and @blog.author_list.any? %>
+				<% @blog.author_list.each do |author|%>
+					<li class="user"><%= link_to author, blog_author_url(author) -%><%= author == @blog.author_list.last ? '.' : ', ' %></li>
+     			<% end %>
+  			<% end %>       
+			<li class="time"><%= posted.strftime("%I:%M %p") %></li>
+			<li class="comment"><a href="#">10 Comments</a></li> 
+			<li class="permalink"><%= link_to "permalink", @blog.permalink %></li>
+		</ul>
+  	</div>
+
+	<% if @tags %>
+		<% if @blog.tag_list.present? and @blog.tag_list.any? %>
+			<div class="post-meta">
+    			<h4>tags</h4>
+				<ul class="tags">
+					<% @blog.tag_list.each do |tag| -%>
+        				<li><%= link_to tag, blog_tag_url(tag) -%><%= tag == @blog.tag_list.last ? '.' : ', ' -%></li>
+ 			   		 <% end -%>
+				</ul>
+			</div>
+  		<% end %>
+	<% end %> 
+</div>
+
+<div class="post-bottom-section">
+ 	<h4><%= @blog.comments.count %> comments</h4>
+ 	<div class="right">
+		<ol class="commentlist">	
+	       <% @blog.comments.approved.each do |comment| %>
+			<li class="depth-1">
+				<div class="comment-info">
+					<%= image_tag "gravatar.jpg", :theme => true %>
+					<cite>
+						<%=h comment.name %> Said <%= time_ago_in_words comment.created_at %> ago : <br />
+						<%=h comment.title %>
+                        <div class="comment-text">
+							<p><%=h comment.body %></p>
+						</div>
+					</cite>
+				</div>
+			</li>
+			<% end %>
+		</ol>
+	</div>
+</div>
+
+	<%= render :partial => "form" %>
